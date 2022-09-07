@@ -1,0 +1,21 @@
+{
+    "name": "ernes/bienes-raices",
+    "description": "curso de desarrollo web con poo",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Luis Ernesto Hdz Rivera",
+            "email": "contacto@lernesto.net"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Model\\": "./models",
+            "MVC\\": "./",
+            "Controllers\\": "./controllers"
+        }
+    }
+}
