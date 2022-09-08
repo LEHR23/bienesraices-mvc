@@ -9,9 +9,11 @@ use Intervention\Image\ImageManagerStatic as Image;
 class PropiedadController {
   public static function index(Router $router) {
     $propiedades = Propiedad::all();
+    $vendedores = Vendedor::all();
     $router->render('propiedades/Admin', [
       'propiedades' => $propiedades,
-      'resultado' => $_GET['resultado'] ?? null
+      'resultado' => $_GET['resultado'] ?? null,
+      'vendedores' => $vendedores
     ]);
   }
 

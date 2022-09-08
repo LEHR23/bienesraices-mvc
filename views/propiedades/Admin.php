@@ -9,7 +9,7 @@
   } ?>
 
   <a href="/propiedades/crear" class="boton boton-verde">Nueva Propiedad</a>
-  <a href="/bienesraices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+  <a href="/vendedores/crear" class="boton boton-amarillo">Nuevo Vendedor</a>
   <h2>Propiedades</h2>
   <table class="propiedades">
     <thead>
@@ -42,5 +42,32 @@
       <?php endforeach; ?>
     </tbody>
   </table>
-
+  <h2>Vendedores</h2>
+  <table class="propiedades">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Telefono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($vendedores as $vendedor): ?>
+      <tr>
+        <td><?php echo $vendedor->id; ?></td>
+        <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
+        <td><?php echo $vendedor->telefono; ?></td>
+        <td>
+          <a href="/vendedores/actualizar?id=<?php echo $vendedor->id; ?>" class="boton-amarillo-block">Actualizar</a>
+          <form method="POST" class="w-100" action="/vendedores/eliminar">
+            <input type="hidden" name="id" value="<?php echo $vendedor->id; ?>">
+            <input type="hidden" name="tipo" value="vendedor">
+            <input type="submit" class="boton-rojo-block boton" value="Eliminar">
+          </form>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
 </main>
