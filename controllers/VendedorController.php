@@ -1,6 +1,8 @@
 <?php
 
 namespace Controllers;
+use MVC\Router;
+use Model\Vendedor;
 
 class VendedorController{
 
@@ -11,7 +13,12 @@ class VendedorController{
       $vendedor = new Vendedor($_POST['vendedor']);
       $errores = $vendedor->validar();
       if(empty($errores)){
-        $vendedor->guardar();
+        $resultado = $vendedor->guardar();
+        if($resultado){
+          header('Location: /admin?resultado=1');
+        } else {
+          echo "Error al guardar";
+        }
       }
     }
     $router->render('vendedores/Crear', [

@@ -3,6 +3,7 @@
 
   use MVC\Router;
   use Controllers\PropiedadController;
+  use Controllers\VendedorController;
 
   $router = new Router();
 
