@@ -25,7 +25,7 @@
   <header class="header <?php echo $inicio ? 'inicio' : '' ?>">
     <div class="contenedor contenido-header">
       <div class="barra">
-        <a href="/bienesraices">
+        <a href="/">
           <img src="../build/img/logo.svg" alt="logo bienes raices" />
         </a>
         <div class="mobile-menu">
@@ -34,12 +34,12 @@
         <div class="derecha">
           <img class="dark-mode-boton" src="/../build/img/dark-mode.svg">
           <nav class="navegacion">
-            <a href="/bienesraices/nosotros.php">Nosotros</a>
-            <a href="/bienesraices/anuncios.php">Anuncios</a>
-            <a href="/bienesraices/blog.php">Blog</a>
-            <a href="/bienesraices/contacto.php">Contacto</a>
+            <a href="/nosotros">Nosotros</a>
+            <a href="/anuncios">Anuncios</a>
+            <a href="/blog">Blog</a>
+            <a href="/contacto">Contacto</a>
             <?php if($auth): ?>
-            <a href="/bienesraices/cerrar-sesion.php">Cerrar Sesión</a>
+            <a href="/cerrar-sesion">Cerrar Sesión</a>
             <?php endif; ?>
           </nav>
         </div>
@@ -54,10 +54,10 @@
   <footer class="footer seccion">
     <div class="contenedor contenedor-footer">
       <nav class="navegacion">
-        <a href="/bienesraices/nosotros.php">Nosotros</a>
-        <a href="/bienesraices/anuncios.php">Anuncios</a>
-        <a href="/bienesraices/blog.php">Blog</a>
-        <a href="/bienesraices/contacto.php">Contacto</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/anuncios">Anuncios</a>
+        <a href="/blog">Blog</a>
+        <a href="/contacto">Contacto</a>
       </nav>
     </div>
     <p class="copyright">Todos los derechos reservados <?php echo date('Y');?> &copy;</p>
