@@ -36,7 +36,12 @@ class VendedorController{
       $vendedor->sincronizar($args);
       $errores = $vendedor->validar();
       if(empty($errores)){
-        $vendedor->guardar();
+        $resultado = $vendedor->guardar();
+        if($resultado){
+          header('Location: /admin?resultado=2');
+        } else {
+          echo "Error al actualizar";
+        }
       }
     }
     $router->render('vendedores/Actualizar', [
@@ -53,7 +58,12 @@ class VendedorController{
         $tipo = $_POST['tipo'];
         if(validarTipoContenido($tipo)) {
           $vendedor = Vendedor::find($id);
-          $vendedor->eliminar();
+          $resultado = $vendedor->eliminar();
+          if($resultado) {
+            header('Location: /admin?resultado=3');
+          } else {
+            echo "Error al eliminar";
+          }
         }
       }
     }

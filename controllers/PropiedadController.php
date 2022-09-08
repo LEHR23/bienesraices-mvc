@@ -99,18 +99,11 @@ class PropiedadController {
         $tipo = $_POST['tipo'];
 
         if(validarTipoContenido($tipo)){
-          if($tipo === 'propiedad'){
-            $propiedad = Propiedad::find($id);
-            $resultado = $propiedad->eliminar();
-          } else if($tipo === 'vendedor'){
-            $vendedor = Vendedor::find($id);
-            $resultado = $vendedor->eliminar();
-          }
+          $propiedad = Propiedad::find($id);
+          $resultado = $propiedad->eliminar();
        }
         if($resultado){
-          if($tipo === 'propiedad'){
-            $propiedad->borrarImagen();
-          }
+          $propiedad->borrarImagen();
           header('Location: /admin?resultado=3');
         } 
       }
