@@ -66,21 +66,33 @@ class PaginasController {
       $contenido = '<html>';
       $contenido .= '<p>Nombre: ' . $_POST['contacto']['nombre'] . '</p>';
       $contenido .= '<p>Correo: ' . $_POST['contacto']['correo'] . '</p>';
-      $contenido .= '<p>Telefono: ' . $_POST['contacto']['telefono'] . '</p>';
+
+      if( $_POST['contacto']['contacto'] === 'telefono' ) {
+        $contenido .= '<p>Eligió ser contactado por teléfono:</p>';
+        $contenido .= '<p>Teléfono: ' . $_POST['contacto']['telefono'] . '</p>';
+        $contenido .= '<p>Fecha: ' . $_POST['contacto']['fecha'] . '</p>';
+        $contenido .= '<p>Hora: ' . $_POST['contacto']['hora'] . '</p>';
+      } else {
+        $contenido .= '<p>Eligió ser contactado por correo:</p>';
+        $contenido .= '<p>Correo: ' . $_POST['contacto']['correo'] . '</p>';
+      }
+
       $contenido .= '<p>Mensaje: ' . $_POST['contacto']['mensaje'] . '</p>';
       $contenido .= '<p>Vende o Compra: ' . $_POST['contacto']['accion'] . '</p>';
       $contenido .= '<p>Precio o Presupuesto: $' . $_POST['contacto']['presupuesto'] . '</p>';
-      $contenido .= '<p>Prefiere ser contactado por: ' . $_POST['contacto']['contacto'] . '</p>';
-      $contenido .= '<p>Fecha: ' . $_POST['contacto']['fecha'] . '</p>';
-      $contenido .= '<p>Hora: ' . $_POST['contacto']['hora'] . '</p>';
       $contenido .= '</html>';
 
       $phpmailer->Body = $contenido;
       $phpmailer->AltBody = 'Este es el contenido en texto plano';
 
-      $phpmailer->send();
+      if($phpmailer->send()){
+        $respuesta = 'Mensaje enviado correctamente';
+      } else {
+        $respuesta = 'Error al enviar el mensaje';
+      }
     }
     $router->render( 'paginas/Contacto' , [
+      'respuesta' => $respuesta ?? null
     ]);
   }
   
