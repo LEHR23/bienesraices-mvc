@@ -4,6 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Propiedad;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class PaginasController {
   public static function index( Router $router ) {
@@ -47,11 +48,40 @@ class PaginasController {
 
   public static function contacto( Router $router ) {
     if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-      
-    } else {
-      $router->render( 'paginas/Contacto' , [
-      ]);
+      $phpmailer = new PHPMailer();
+      $phpmailer->isSMTP();
+      $phpmailer->Host = 'smtp.mailtrap.io';
+      $phpmailer->SMTPAuth = true;
+      $phpmailer->Port = 2525;
+      $phpmailer->Username = '9cd3af9d945dbb';
+      $phpmailer->Password = '289b4c0dfc448e';
+      $phpmailer->SMPTSecure = 'tls';
+
+      $phpmailer->setFrom( 'admin@bienesraices.com' );
+      $phpmailer->addAddress( 'admin@bienesraices.com' , 'bienesraices.com' );
+      $phpmailer->Subject = 'Tienes un nuevo mensaje';
+      $phpmailer->isHTML( true );
+      $phpmailer->CharSet = 'UTF-8';
+
+      $contenido = '<html>';
+      $contenido .= '<p>Nombre: ' . $_POST['contacto']['nombre'] . '</p>';
+      $contenido .= '<p>Correo: ' . $_POST['contacto']['correo'] . '</p>';
+      $contenido .= '<p>Telefono: ' . $_POST['contacto']['telefono'] . '</p>';
+      $contenido .= '<p>Mensaje: ' . $_POST['contacto']['mensaje'] . '</p>';
+      $contenido .= '<p>Vende o Compra: ' . $_POST['contacto']['accion'] . '</p>';
+      $contenido .= '<p>Precio o Presupuesto: $' . $_POST['contacto']['presupuesto'] . '</p>';
+      $contenido .= '<p>Prefiere ser contactado por: ' . $_POST['contacto']['contacto'] . '</p>';
+      $contenido .= '<p>Fecha: ' . $_POST['contacto']['fecha'] . '</p>';
+      $contenido .= '<p>Hora: ' . $_POST['contacto']['hora'] . '</p>';
+      $contenido .= '</html>';
+
+      $phpmailer->Body = $contenido;
+      $phpmailer->AltBody = 'Este es el contenido en texto plano';
+
+      $phpmailer->send();
     }
+    $router->render( 'paginas/Contacto' , [
+    ]);
   }
   
 }

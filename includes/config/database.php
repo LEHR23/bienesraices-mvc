@@ -5,7 +5,8 @@ function conectarDB() {
     'localhost',
     'root',
     '',
-    'bienesraices_crud'
+    'bienesraices_crud',
+    '3307'
   );
 
   if (!$conexion) {
