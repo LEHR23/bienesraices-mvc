@@ -2,11 +2,11 @@
 
 function conectarDB() {
   $conexion = new mysqli(
-    'localhost',
+    '192.168.0.199',
     'root',
     '',
     'bienesraices_crud',
-    '3307'
+    '3306'
   );
 
   if (!$conexion) {
