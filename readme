@@ -1,0 +1,4 @@
+para ejecutar el proyecto es: 
+
+cd public
+php -S localhost:3000
