@@ -50,11 +50,11 @@ class PaginasController {
     if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
       $phpmailer = new PHPMailer();
       $phpmailer->isSMTP();
-      $phpmailer->Host = 'smtp.mailtrap.io';
+      $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
       $phpmailer->SMTPAuth = true;
       $phpmailer->Port = 2525;
-      $phpmailer->Username = '9cd3af9d945dbb';
-      $phpmailer->Password = '289b4c0dfc448e';
+      $phpmailer->Username = '23a5b63cc9b1ae';
+      $phpmailer->Password = 'ca74144cfa0c88';
       $phpmailer->SMPTSecure = 'tls';
 
       $phpmailer->setFrom( 'admin@bienesraices.com' );
@@ -63,24 +63,92 @@ class PaginasController {
       $phpmailer->isHTML( true );
       $phpmailer->CharSet = 'UTF-8';
 
-      $contenido = '<html>';
-      $contenido .= '<p>Nombre: ' . $_POST['contacto']['nombre'] . '</p>';
-      $contenido .= '<p>Correo: ' . $_POST['contacto']['correo'] . '</p>';
+      $contenido = "<html>
+      <style>
+        h1, h2, p, span, div, body{
+          margin: 0;
+          padding: 0;
+          box-sizing: content-box;
+        }
+        .contenedor{
+          width: 100vw;
+          height: 100vh;
+          font-family: 'Courier New', Courier, monospace;
+        }
+        .resaltado{
+          background-color: #333333;
+          text-align: center;
+          color: white;
+        }
+        .logo{
+          font-size: 40px;
+          padding: 10px;
+        }
+        p{
+          margin: 15px 20px 0 15px;
+          font-weight: bold;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        span{
+          font-weight: 400;
+        }
+        .ultimo{
+          margin-bottom: 15px;
+        }
+        .info{
+          padding: 5px;
+        }
+        .contenedor-contacto{
+          display: flex;
+          justify-content: space-around;
+        }
+        .copyright{
+          width: 100%;
+          margin: 0;
+          padding: 15px 0;
+        }
+        @media (min-width: 400px) {
+          .contenedor-contacto{
+            flex-direction: row;
+          }
+        }
+      </style>
+    
+      <div class='contenedor'>
+        <h1 class='resaltado logo'>Bienes Raices</h1>";
+      $contenido .= '<p>El usuario: <span>' . $_POST['contacto']['nombre'] . '</span></p>';
 
-      if( $_POST['contacto']['contacto'] === 'telefono' ) {
-        $contenido .= '<p>Eligió ser contactado por teléfono:</p>';
-        $contenido .= '<p>Teléfono: ' . $_POST['contacto']['telefono'] . '</p>';
-        $contenido .= '<p>Fecha: ' . $_POST['contacto']['fecha'] . '</p>';
-        $contenido .= '<p>Hora: ' . $_POST['contacto']['hora'] . '</p>';
+      $contenido .= '<p class="ultimo">Se encuentra interesado en : <span>' . $_POST['contacto']['accion'] . '</span></p>';
+
+      $contenido .= '<h2 class="resaltado info">Envio la siguiente información</h2>';
+
+      $contenido .= '<p class="ultimo">' . $_POST['contacto']['mensaje'] . '</p>';
+      
+      $contenido .= '<div>
+      <h2 class="resaltado info">Información de la propiedad</h2>';
+
+      if($_POST['contacto']['accion'] === 'comprar' ){
+        $contenido .= '<p class="ultimo">Presupuesto del usuario: <span>' . $_POST['contacto']['presupuesto'] . '</span></p>';
       } else {
-        $contenido .= '<p>Eligió ser contactado por correo:</p>';
-        $contenido .= '<p>Correo: ' . $_POST['contacto']['correo'] . '</p>';
+        $contenido .= '<p class="ultimo">Precio de la propiedad: <span>' . $_POST['contacto']['presupuesto'] . '</span></p>';
       }
 
-      $contenido .= '<p>Mensaje: ' . $_POST['contacto']['mensaje'] . '</p>';
-      $contenido .= '<p>Vende o Compra: ' . $_POST['contacto']['accion'] . '</p>';
-      $contenido .= '<p>Precio o Presupuesto: $' . $_POST['contacto']['presupuesto'] . '</p>';
-      $contenido .= '</html>';
+      $contenido .= '<h2 class="resaltado info">Forma de contacto: <span></span></h2>';
+
+      if( $_POST['contacto']['contacto'] === 'telefono' ) {
+        $contenido .= '<div class="contenedor-contacto ultimo">';
+        $contenido .= '<p>Teléfono: <span>' . $_POST['contacto']['telefono'] . '</span></p>';
+        $contenido .= '<p>Día: <span>' . $_POST['contacto']['fecha'] . '</span></p>';
+        $contenido .= '<p>Hora: <span>' . $_POST['contacto']['hora'] . '</span></p>';
+        $contenido .= '</div>';
+      } else {
+        $contenido .= '<p class="ultimo">Correo: <span>' . $_POST['contacto']['correo'] . '</span></p>';
+      }
+        
+      $contenido .= '</div>
+      <p class="resaltado copyright">Todos los derechos reservados 2023 &copy;</p>
+    </div>
+  </html>';
 
       $phpmailer->Body = $contenido;
       $phpmailer->AltBody = 'Este es el contenido en texto plano';

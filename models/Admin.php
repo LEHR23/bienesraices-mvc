@@ -4,7 +4,7 @@ namespace Model;
 
 class Admin extends ActiveRecord {
 
-  protected static $tabla = 'usuarios';
+  protected static $tabla = 'usuario';
   protected static $columnasDB = ['id', 'email', 'password'];
 
   public $id;

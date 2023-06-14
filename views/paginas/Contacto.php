@@ -27,8 +27,8 @@
       <label for="accion">Vende o Compra</label>
       <select id="accion" name="contacto[accion]" require>
         <option value="" disabled selected>Seleccione</option>
-        <option value="compra">Compra</option>
-        <option value="vende">Vende</option>
+        <option value="comprar">Compra</option>
+        <option value="vender">Vende</option>
       </select>
 
       <label for="presupuesto">Precio o Presupuesto</label>
