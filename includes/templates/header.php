@@ -18,6 +18,7 @@
       media="screen"
       href="/bienesraices/build/css/app.css"
     />
+  <link rel="icon" href="../../favicon.ico">
   </head>
   <body>
     <header class="header <?php echo $inicio ? 'inicio' : '' ?>">
@@ -32,7 +33,7 @@
           <div class="derecha">
             <img class="dark-mode-boton" src="/bienesraices/build/img/dark-mode.svg">
             <nav class="navegacion">
-              <a href="/bienesraices/nosotros.php">Nosotros</a>
+              <a href="/bienesraices/nosotros.php">Nosotros test</a>
               <a href="/bienesraices/anuncios.php">Anuncios</a>
               <a href="/bienesraices/blog.php">Blog</a>
               <a href="/bienesraices/contacto.php">Contacto</a>

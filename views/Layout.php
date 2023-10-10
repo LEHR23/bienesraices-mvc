@@ -19,6 +19,7 @@
   <title>Bienes Raíces</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" media="screen" href="../build/css/app.css" />
+  <link rel="icon" href="../favicon.ico">
 </head>
 
 <body>
