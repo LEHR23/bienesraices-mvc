@@ -50,15 +50,15 @@ class PaginasController {
     if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
       $phpmailer = new PHPMailer();
       $phpmailer->isSMTP();
-      $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+      $phpmailer->Host = $_ENV['EMAIL_SERVER'];
       $phpmailer->SMTPAuth = true;
-      $phpmailer->Port = 2525;
-      $phpmailer->Username = '23a5b63cc9b1ae';
-      $phpmailer->Password = 'ca74144cfa0c88';
-      $phpmailer->SMPTSecure = 'tls';
+      $phpmailer->Port = $_ENV['EMAIL_PORT'];
+      $phpmailer->Username = $_ENV['EMAIL_USER'];
+      $phpmailer->Password = $_ENV['EMAIL_PASS'];
+      $phpmailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
 
-      $phpmailer->setFrom( 'admin@bienesraices.com' );
-      $phpmailer->addAddress( 'admin@bienesraices.com' , 'bienesraices.com' );
+      $phpmailer->setFrom( 'dev@lernesto.net' );
+      $phpmailer->addAddress( 'dev@lernesto.net' , 'Test bienes raices' );
       $phpmailer->Subject = 'Tienes un nuevo mensaje';
       $phpmailer->isHTML( true );
       $phpmailer->CharSet = 'UTF-8';
