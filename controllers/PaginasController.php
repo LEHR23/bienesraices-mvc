@@ -57,9 +57,9 @@ class PaginasController {
       $phpmailer->Password = $_ENV['EMAIL_PASS'];
       $phpmailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
 
-      $phpmailer->setFrom( 'dev@lernesto.net' );
-      $phpmailer->addAddress( 'dev@lernesto.net' , 'Test bienes raices' );
-      $phpmailer->Subject = 'Tienes un nuevo mensaje';
+      $phpmailer->setFrom( 'dev@lernesto.net', 'Bienes raices' );
+      $phpmailer->addAddress( 'dev@lernesto.net' , 'Ernesto' );
+      $phpmailer->Subject = 'demo bienes raices';
       $phpmailer->isHTML( true );
       $phpmailer->CharSet = 'UTF-8';
 
@@ -153,10 +153,16 @@ class PaginasController {
       $phpmailer->Body = $contenido;
       $phpmailer->AltBody = 'Este es el contenido en texto plano';
 
-      if($phpmailer->send()){
-        $respuesta = 'Mensaje enviado correctamente';
-      } else {
-        $respuesta = 'Error al enviar el mensaje';
+      try {
+        //code...
+        if($phpmailer->send()){
+          $respuesta = 'Mensaje enviado correctamente';
+        } else {
+          $respuesta = 'Error al enviar el mensaje';
+        }
+      } catch (\Throwable $th) {
+        //throw $th;
+        $respuesta = $th;
       }
     }
     $router->render( 'paginas/Contacto' , [
